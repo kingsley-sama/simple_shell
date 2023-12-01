@@ -1,6 +1,4 @@
 #include "shell.h"
-#include <stddef.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 /**
@@ -10,8 +8,8 @@
 void print_str(char *str)
 {
 	unsigned int i = 0;
-	
-	while (str[i] != '\0')
+
+	while (str[i] != '\0' && str[i] != '\n')
 	{
 		i++;
 	}

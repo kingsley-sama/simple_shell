@@ -9,23 +9,23 @@
  *@argv: argument array for the program
  * Return: the exit status
  */
-
-
-int main()
+int main(void)
 {
 	do {
 		char *input = NULL;
 		ssize_t getline_val;
 		size_t input_size = 0;
+
 		print_str("($)");
 		getline_val = getline(&input, &input_size, stdin);
 		if (getline_val == -1)
 		{
 			perror("getline error");
+			free(input);
 		}
 		print_str(input);
 		free(input);
 	} while (1);
-	
+	putchar('\n');
 	return (0);
 }

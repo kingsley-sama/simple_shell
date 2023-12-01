@@ -9,8 +9,9 @@
  */
 void print_str(char *str)
 {
-	unsigned int i;
-	while (str[i] != 0)
+	unsigned int i = 0;
+	
+	while (str[i] != '\0')
 	{
 		i++;
 	}

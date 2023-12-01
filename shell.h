@@ -6,5 +6,4 @@
 #include <ctype.h>
 void print_str(char *str);
 void perror_msg(char *msg);
-
 #endif

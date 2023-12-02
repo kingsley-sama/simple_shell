@@ -1,8 +1,6 @@
 # 0x16.C Simple Shell ( Building a Unix Shell Interpreter)
 
-![Unix Shell Interpreter](https://media.istockphoto.com/id/869939846/photo/
-3d-text-of-unix.jpg?s=1024x1024&w=is&k=20&c=
-LWr3ZqR9TJHZLDZFqCbMcbIzGCs4aAxO62J9twdCJWw=)
+![Unix Shell Interpreter](https://media.istockphoto.com/id/869939846/photo/3d-text-of-unix.jpg?s=1024x1024&w=is&k=20&c=LWr3ZqR9TJHZLDZFqCbMcbIzGCs4aAxO62J9twdCJWw=)
 
 ### Image source:iStock
 

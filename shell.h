@@ -6,4 +6,5 @@
 #include <ctype.h>
 void print_str(char *str);
 void perror_msg(char *msg);
+int  print_current_directory(void);
 #endif

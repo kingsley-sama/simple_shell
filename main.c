@@ -25,7 +25,7 @@ int main(void)
 		}
 		print_str(input);
 		free(input);
+		putchar('\n');
 	} while (1);
-	putchar('\n');
 	return (0);
 }

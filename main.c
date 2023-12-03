@@ -24,6 +24,7 @@ int main(void)
 			free(input);
 		}
 		print_str(input);
+		print_current_directory();
 		free(input);
 		putchar('\n');
 	} while (1);

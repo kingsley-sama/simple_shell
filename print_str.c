@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 /**
- * print_str - prints string to the terminal
+ * print_str -Print string.
+ *
  * Return: Void
  */
 void print_str(char *str)

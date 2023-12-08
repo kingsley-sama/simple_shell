@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 /**
- * _putchar - writes a character to stdout
+ * _putchar - Writes single character to stdout.
+ * @c: The character to write.
  * Return: Void
  */
 int  _putchar(char c)

@@ -1,9 +1,10 @@
 #include "shell.h"
 /**
- *str_cpy - copies a string and return the copy
- *@src: this is the source string
- *@dest: this is the destination string
- *Return: the destination string
+ *str_cpy - Copy string from one location to another.
+ *@src: The source string.
+ *@dest: The destination string.
+ *
+ *Return: The destination string.
  */
 char *str_cpy(char *dest, char *src)
 {

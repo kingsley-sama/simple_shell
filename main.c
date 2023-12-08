@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 /**
- * main - HSH shell entry function
- *@argc: count of command line input
- *@argv: argument array for the program
- * Return: the exit status
+ * main - HSH entry point.
+ * @argc: Number of command line argument.
+ *@argv: Argument vector.
+ * Return: Exit status.
  */
 int main(void)
 {

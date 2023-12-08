@@ -2,10 +2,11 @@
 #include <stdio.h>
 
 /**
- *str_cmp - compares dest string with src string
- *@dest: destination string
- *@src: source string
- *Return: 0 on succes
+ *str_cmp - Compares dest string with src string.
+ *@dest: The destination string
+ *@src: The source string.
+ *
+ *Return: 0(success)
  */
 int str_cmp(char *dest, char *src)
 {
@@ -13,7 +14,7 @@ int str_cmp(char *dest, char *src)
 
 	while (src[i] != '\0')
 	{
-		if (dest[i] != src[i] )
+		if (dest[i] != src[i])
 			return (0);
 		i++;
 	}

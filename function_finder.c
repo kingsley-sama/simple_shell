@@ -3,6 +3,13 @@
 #include <string.h>
 #include <dirent.h>
 
+/**
+ * search_file- Search for files
+ * @dir_path: The directory path.
+ * @filename: The file to search for.
+ *
+ * Return: 0.
+ */
 int search_file(const char *dir_path, const char *file_name) {
     DIR *dir = opendir(dir_path);
 
@@ -25,7 +32,12 @@ int search_file(const char *dir_path, const char *file_name) {
     closedir(dir);
     return -1;
 }
-
+/**
+ * search_file_in_path- The path to search from.
+ * @filename:The file to search for.
+ *
+ * Return: 0(success)
+ */
 int search_file_in_path(const char *file_name) {
     char *path_env = getenv("PATH");
     
@@ -47,6 +59,11 @@ int search_file_in_path(const char *file_name) {
     return -1;  // File not found in any directory in the PATH
 }
 
+/**
+ * main- Entry point.
+ *
+ * Return: 0
+ */
 int main() {
     const char *file_to_search = "ls";
 

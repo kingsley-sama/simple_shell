@@ -1,7 +1,11 @@
 #include "shell.h"
 #include <stdio.h>
 
-
+/**
+ * main- Entry point
+ *
+ * Return:0(success)
+ */
 int main() {
     char input[] = "This,is,a,sample,string";
     const char delimiters[] = ",";
@@ -15,5 +19,5 @@ int main() {
         token = str_tok(NULL, delimiters);
     }
 
-    return 0;
+    return (0);
 }

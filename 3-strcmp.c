@@ -3,8 +3,8 @@
 #include "main.h"
 /**
  * _strcmp - compares two strings
- *@s1: this is the left string
- *@s2: this the right string
+ *@s1: The left string
+ *@s2: The right string
  * Return: 0 if s1 == s2, -15 if s1 > s2; 15 is s1 < s2
  */
 

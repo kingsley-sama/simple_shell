@@ -8,7 +8,8 @@ void print_str(char *str);
 void perror_msg(char *msg);
 int  print_current_directory(void);
 void dispatcher(char *str);
-char *_strchr(char *s, char c);
-char *d_strtok(char *str, const char *dl);
-int _strlen(char *s);
+char *str_chr(const char *s, int c);
+char *str_tok(char *str, const char *delimiters);
+int str_len(char *s);
+int str_cmp(char *dest, char *src);
 #endif

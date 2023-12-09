@@ -2,11 +2,11 @@
 #include <stdarg.h>
 #include <stdio.h>
 /**
- * _strlen - swaps the value of two integer
- * Return: i the length of the string
- *@s: this is the character whose length is to be determined
+ * str_len - calculates the length of it’s integer input
+ * Return: strlen
+ *@s: source string
  */
-int _strlen(char *s)
+int str_len(char *s)
 {
 	int i;
 

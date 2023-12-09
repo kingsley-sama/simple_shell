@@ -5,6 +5,13 @@
 #include <stdio.h>
 #include <sys/wait.h>
 #include <string.h>
+
+/**
+ * dispatcher- Creates a child process.
+ * @str: source string
+ *
+ * Return: void.
+ */
 void dispatcher(char *str)
 {
 	int i = 0;

@@ -16,24 +16,24 @@ char *d_strtok(char *str, const char *dl)
 	p = NULL;
 
 	if (str != NULL)
-	p = str;
+		p = str;
 
 	if (p == NULL || *p == '\0')
-	return (NULL);
+		return (NULL);
 
 	while (*p != '\0' && strchr(dl, *p) != NULL)
-	p++;
+		p++;
 
 	if (*p == '\0')
-	return (NULL);
+		return (NULL);
 
 	while (*p != '\0' && strchr(dl, *p) == NULL)
-	p++;
+		p++;
 
 	if (*p != '\0')
 	{
-	*p = '\0';
-	p++;
+		*p = '\0';
+		p++;
 	}
 	return (tok);
 

@@ -2,9 +2,10 @@
 #include <stdarg.h>
 #include <stdio.h>
 /**
- * str_len - calculates the length of it’s integer input
+ * str_len - calculates the length of its integer input
+ * @s: source string
+ *
  * Return: strlen
- *@s: source string
  */
 int str_len(char *s)
 {

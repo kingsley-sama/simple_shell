@@ -87,20 +87,18 @@ void execute_command(const char *command) {
 }
 
 int main() {
-    	char **none = tokenize_command("ls -al;pwd; echo \"hello world\" ls -la");
-	
     char *commands[] = {
         "ls -l -a",
         "ls -la",
-        "echo Hello World",
+        "echo Hello World\"\n\'",
         "gcc -v",
         // Add more commands as needed
         NULL  // NULL-terminate the array
     };
 
     // Execute the commands one after the other
-    for (int i = 0; none[i] != NULL; ++i) {
-        execute_command(none[i]);
+    for (int i = 0; commands[i] != NULL; ++i) {
+        execute_command(commands[i]);
     }
 
     return 0;

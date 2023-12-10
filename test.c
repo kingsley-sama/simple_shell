@@ -6,6 +6,12 @@
 
 #define MAX_COMMAND_LENGTH 100
 
+/**
+ * tokenize_command- A command that tokenises.
+ * @command: The input command.
+ *
+ * Return: The tokenised command.
+ */
 char** tokenize_command(const char *command) {
     const char *delimiter_space = " \t\n";
     const char *delimiter_semicolon = ";";
@@ -43,6 +49,12 @@ char** tokenize_command(const char *command) {
     return tokens;
 }
 
+/**
+ * free_tokens- Frees allocated memory.
+ * @token:Pointer that points to the string.
+ *
+ * Return: Void
+ */
 void free_tokens(char **tokens) {
     if (tokens == NULL) {
         return;
@@ -54,6 +66,12 @@ void free_tokens(char **tokens) {
 
     free(tokens);
 }
+/**
+ * execute_command- Executes command.
+ * @command: The input command.
+ *
+ * Return: void.
+ */
 
 void execute_command(const char *command) {
     // Fork a new process
@@ -86,6 +104,11 @@ void execute_command(const char *command) {
     }
 }
 
+/**
+ * main- Entry point.
+ * 
+ * Return:0
+ */
 int main() {
     char *commands[] = {
         "ls -l -a",

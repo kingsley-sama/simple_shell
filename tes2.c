@@ -6,6 +6,14 @@
 #include <dirent.h>
 
 #define MAX_COMMAND_LENGTH 100
+
+/**
+ * tokenize_command- A command that tokenises.
+ * @command: The input command.
+ *
+ * Return:The tokenised command.
+ */
+
 char** tokenize_command(const char *command) {
     const char *delimiter_semicolon = ";";
 
@@ -35,6 +43,12 @@ char** tokenize_command(const char *command) {
     return tokens;
 }
 
+/**
+ * free_tokens:Frees the memory allocated to string(tokens).
+ * @tokens: The pointer to the tokenise string.
+ *
+ * Return:void.
+ */
 void free_tokens(char **tokens) {
     if (tokens == NULL) {
         return;
@@ -45,6 +59,13 @@ void free_tokens(char **tokens) {
 
     free(tokens);
 }
+
+/**
+ * find_executable- Command that find and execute an executable.
+ * @command: The input command.
+ *
+ * Return:0(success)
+ */
 char* find_executable(const char *command) {
     char *path = getenv("PATH");
     char *token = strtok(strdup(path), ":");
@@ -65,6 +86,13 @@ char* find_executable(const char *command) {
     free(token);
     return NULL;
 }
+
+/**
+ * execute_command- Exexutes commands.
+ * @command: The input command.
+ *
+ * Return: void.
+ */
 
 void execute_command(const char *command) {
     // Find the executable path
@@ -107,6 +135,11 @@ void execute_command(const char *command) {
     free(executable_path);
 }
 
+/**
+ * main- Entry point
+ *
+ * Return:0(always)
+ */
 int main() {
 	char **none = tokenize_command("ls -al; pwd; echo \"hello world\" ls -la");
 	

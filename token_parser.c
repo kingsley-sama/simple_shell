@@ -4,6 +4,14 @@
 
 #define MAX_COMMAND_LENGTH 100
 
+/**
+ * tokenize_command- The command that tokenises a string.
+ * @command: The input command.
+ * @delimiter:The delimiter in the string.
+ *
+ * Return: Tokenised command.
+ */
+
 char** tokenize_command(const char *command, const char *delimiter)
 {
     char **tokens = NULL;
@@ -26,6 +34,13 @@ char** tokenize_command(const char *command, const char *delimiter)
     tokens[token_count] = NULL;
     return tokens;
 }
+
+/**
+ * free_tokens- Frees allocated memory.
+ * @tokens:Pointer that points to the string.
+ *
+ * Return: void.
+ */
 
 void free_tokens(char **tokens) {
     for (int i = 0; tokens[i] != NULL; ++i) {

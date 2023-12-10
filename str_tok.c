@@ -2,6 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 
+/**
+ * str_tok- Tokenises the string.
+ * @str: The string to tokenise.
+ * @delimiter: The delimiter in the string.
+ *
+ * Return:Tokenised string.
+ */
+
 char *str_tok(char *str, const char *delimiters) {
     static char *str_start = NULL;  // Static variable to keep track of the last token
     char *initial_token;

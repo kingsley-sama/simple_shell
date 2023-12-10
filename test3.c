@@ -17,7 +17,62 @@ char** tokenize_command(const char *command) {
     char *token = strtok(strdup(command), delimiter_semicolon);
 
     while (token != NULL) {
+        // Tokenize each part of the command based on spaces, respecting quoteschar** tokenize_command(const char *command) {
+    const char *delimiter_space = " \t\n";
+    const char *delimiter_semicolon = ";";
+
+    char **tokens = NULL;
+    int token_count = 0;
+
+    // Tokenize the command based on semicolons
+    char *token = strtok(strdup(command), delimiter_semicolon);
+
+    while (token != NULL) {
         // Tokenize each part of the command based on spaces, respecting quotes
+        char *subtoken;
+        while ((subtoken = strtok(NULL, delimiter_space)) != NULL) {
+            // Check if the subtoken contains quotes
+            if (subtoken[0] == '\"') {
+                // Concatenate tokens until a closing quote is found
+                while (subtoken[strlen(subtoken) - 1] != '\"') {
+                    char *next_subtoken = strtok(NULL, delimiter_space);
+                    if (next_subtoken == NULL) {
+                        fprintf(stderr, "Error: Unmatched quotes in command\n");
+                        exit(EXIT_FAILURE);
+                    }
+
+                    // Concatenate the next subtoken to the current one
+                    subtoken = realloc(subtoken, strlen(subtoken) + strlen(next_subtoken) + 2);
+                    strcat(subtoken, " ");
+                    strcat(subtoken, next_subtoken);
+                }
+            } else if (subtoken[0] == '\\' && subtoken[1] != '\0') {
+                // Handle escape characters
+                char *next_subtoken = strtok(NULL, delimiter_space);
+                if (next_subtoken != NULL) {
+                    // Concatenate the next subtoken to the current one
+                    subtoken = realloc(subtoken, strlen(subtoken) + strlen(next_subtoken) + 2);
+                    strcat(subtoken, " ");
+                    strcat(subtoken, next_subtoken);
+                }
+            }
+
+            tokens = realloc(tokens, sizeof(char *) * (token_count + 1));
+
+            if (tokens == NULL) {
+                fprintf(stderr, "Memory allocation failed\n");
+                exit(EXIT_FAILURE);
+            }
+
+            tokens[token_count] = strdup(subtoken);
+            token_count++;
+        }
+
+        token = strtok(NULL, delimiter_semicolon);
+    }
+
+    tokens = realloc(tokens, sizeof(char *) * (token_count + 1));
+    tokens[token_count] = NULL;
         char *subtoken;
         while ((subtoken = strtok(NULL, delimiter_space)) != NULL) {
             // Check if the subtoken contains quotes

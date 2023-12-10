@@ -2,6 +2,13 @@
 #include <unistd.h>
 #include <string.h>
 #include "shell.h"
+
+/**
+ * find_command- Command that finds a path.
+ * @command:The command.
+ *
+ * Return: 0(success)
+ */
 char* find_command(const char *command) {
     char *path = getenv("PATH");
     char *token = strtok(strdup(path), ":");

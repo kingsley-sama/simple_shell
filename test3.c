@@ -6,6 +6,12 @@
 
 #define MAX_COMMAND_LENGTH 100
 
+/**
+ * tokenize_command- Command that tokenises.
+ * @command: The input command.
+ *
+ * Return: The tokenised command.
+ */
 char** tokenize_command(const char *command) {
     const char *delimiter_space = " \t\n";
     const char *delimiter_semicolon = ";";
@@ -112,6 +118,12 @@ char** tokenize_command(const char *command) {
     return tokens;
 }
 
+/**
+ * free_token- Frees the allocated memory.
+ * @tokens: A pointer to the string(tokens)
+ *
+ * Return: void.
+ */
 void free_tokens(char **tokens) {
     if (tokens == NULL) {
         return;
@@ -124,7 +136,7 @@ void free_tokens(char **tokens) {
     free(tokens);
 }
 
-char* find_command(const char *command) {
+/
     char *path = getenv("PATH");
     char *token = strtok(strdup(path), ":");
 
@@ -144,7 +156,12 @@ char* find_command(const char *command) {
     free(token);
     return NULL;
 }
-
+/**
+ * execute_command- Command that execute process id.
+ * @command:The input command.
+ *
+ * Return: void.
+ */
 void execute_command(const char *command) {
     char *full_command = find_command(command);
 
@@ -162,7 +179,7 @@ void execute_command(const char *command) {
     } else if (pid == 0) {
         // Child process
         // Tokenize the command into subcommands and arguments
-        char **args = tokenize_command(full_command);
+       char **args = tokenize_command(full_command);
 
         // Execute the command
         if (args[0] != NULL && execvp(args[0], args) == -1) {
@@ -185,6 +202,11 @@ void execute_command(const char *command) {
     free(full_command);
 }
 
+/**
+ * main- Entry point.
+ * 
+ * Return:0
+ */
 int main() {
     char input[MAX_COMMAND_LENGTH];
 

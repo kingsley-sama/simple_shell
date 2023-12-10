@@ -1,10 +1,12 @@
 #include "shell.h"
 #include <stdlib.h>
 #include <string.h>
+
 /**
- *_strdup - creates a duplicate of it's string input
- *@str: string input
- *Return: a pointer to the duplicate
+ * _strdup - Duplicate it's string input.
+ * @str: String input.
+
+ * Return: A pointer to the duplicate
  */
 char *str_dup(char *str)
 {

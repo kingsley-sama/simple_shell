@@ -1,11 +1,13 @@
 #include "shell.h"
 #include <stdio.h>
 #include <string.h>
+
 /**
- * _strcat - This fuction concatenates two strings
- *@dest: this is the first string
- *@src: this is the second string
- * Return: final
+ * _strcat - Concatenates two strings.
+ * @dest: The first string.
+ * @src: The second string.
+
+ * Return: Modified string.
  */
 
 char *_strcat(char *dest, char *src)

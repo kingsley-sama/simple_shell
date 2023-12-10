@@ -3,11 +3,10 @@
 #include <string.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <dirent.h>
 
 #define MAX_COMMAND_LENGTH 100
-
 char** tokenize_command(const char *command) {
-    const char *delimiter_space = " \t\n";
     const char *delimiter_semicolon = ";";
 
     char **tokens = NULL;
@@ -17,22 +16,15 @@ char** tokenize_command(const char *command) {
     char *token = strtok(strdup(command), delimiter_semicolon);
 
     while (token != NULL) {
-        // Tokenize each part of the command based on spaces
-        char *subtoken = strtok(token, delimiter_space);
+        tokens = realloc(tokens, sizeof(char *) * (token_count + 1));
 
-        while (subtoken != NULL) {
-            tokens = realloc(tokens, sizeof(char *) * (token_count + 1));
-
-            if (tokens == NULL) {
-                fprintf(stderr, "Memory allocation failed\n");
-                exit(EXIT_FAILURE);
-            }
-
-            tokens[token_count] = strdup(subtoken);
-            token_count++;
-
-            subtoken = strtok(NULL, delimiter_space);
+        if (tokens == NULL) {
+            fprintf(stderr, "Memory allocation failed\n");
+            exit(EXIT_FAILURE);
         }
+
+        tokens[token_count] = strdup(token);
+        token_count++;
 
         token = strtok(NULL, delimiter_semicolon);
     }
@@ -47,15 +39,42 @@ void free_tokens(char **tokens) {
     if (tokens == NULL) {
         return;
     }
-
-    for (int i = 0; tokens[i] != NULL; ++i) {
+        for (int i = 0; tokens[i] != NULL; ++i) {
         free(tokens[i]);
     }
 
     free(tokens);
 }
+char* find_executable(const char *command) {
+    char *path = getenv("PATH");
+    char *token = strtok(strdup(path), ":");
+
+    while (token != NULL) {
+        char *executable_path = malloc(strlen(token) + strlen(command) + 2);
+        sprintf(executable_path, "%s/%s", token, command);
+
+        if (access(executable_path, X_OK) == 0) {
+            free(token);
+            return executable_path;
+        }
+
+        free(executable_path);
+        token = strtok(NULL, ":");
+    }
+
+    free(token);
+    return NULL;
+}
 
 void execute_command(const char *command) {
+    // Find the executable path
+    char *executable_path = find_executable(command);
+
+    if (executable_path == NULL) {
+        fprintf(stderr, "Command '%s' not found\n", command);
+        return;
+    }
+
     // Fork a new process
     pid_t pid = fork();
 
@@ -64,18 +83,17 @@ void execute_command(const char *command) {
         exit(EXIT_FAILURE);
     } else if (pid == 0) {
         // Child process
-        // Tokenize the command into subcommands and arguments
+        // Tokenize the command based on spaces
         char **args = tokenize_command(command);
 
         // Execute the command
-        if (args[0] != NULL && execvp(args[0], args) == -1) {
-            perror("execvp");
+        if (execv(executable_path, args) == -1) {
+            perror("execv");
             exit(EXIT_FAILURE);
         }
 
         // Free the allocated memory for command arguments
         free_tokens(args);
-        exit(EXIT_SUCCESS);
     } else {
         // Parent process
         int status;
@@ -84,10 +102,13 @@ void execute_command(const char *command) {
             printf("Command exited with status %d\n", WEXITSTATUS(status));
         }
     }
+
+    // Free the allocated memory for executable path
+    free(executable_path);
 }
 
 int main() {
-    	char **none = tokenize_command("ls -al;pwd; echo \"hello world\" ls -la");
+	char **none = tokenize_command("ls -al; pwd; echo \"hello world\" ls -la");
 	
     char *commands[] = {
         "ls -l -a",

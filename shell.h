@@ -9,8 +9,8 @@ void perror_msg(char *msg);
 void dispatcher(char *str);
 char *str_chr(const char *s, int c);
 char *str_tok(char *str, const char *delimiters);
-int str_len(char *s);
 int str_cmp(char *dest, char *src);
-int str_len(char *s);
+int str_len(const char *s);
 char *str_dup(const char *str);
+char* find_command(const char *command);
 #endif

@@ -95,66 +95,48 @@ char* find_executable(const char *command) {
  */
 
 void execute_command(const char *command) {
-    // Find the executable path
     char *executable_path = find_executable(command);
-
+    
     if (executable_path == NULL) {
         fprintf(stderr, "Command '%s' not found\n", command);
         return;
     }
-
-    // Fork a new process
     pid_t pid = fork();
-
     if (pid == -1) {
         perror("fork");
         exit(EXIT_FAILURE);
     } else if (pid == 0) {
-        // Child process
-        // Tokenize the command based on spaces
         char **args = tokenize_command(command);
-
-        // Execute the command
         if (execv(executable_path, args) == -1) {
             perror("execv");
             exit(EXIT_FAILURE);
         }
-
-        // Free the allocated memory for command arguments
         free_tokens(args);
     } else {
-        // Parent process
         int status;
         waitpid(pid, &status, 0);
         if (WIFEXITED(status)) {
             printf("Command exited with status %d\n", WEXITSTATUS(status));
         }
     }
-
-    // Free the allocated memory for executable path
     free(executable_path);
 }
 
 /**
  * main- Entry point
- *
  * Return:0(always)
  */
 int main() {
-	char **none = tokenize_command("ls -al; pwd; echo \"hello world\" ls -la");
-	
     char *commands[] = {
         "ls -l -a",
         "ls -la",
         "echo Hello World",
         "gcc -v",
-        // Add more commands as needed
-        NULL  // NULL-terminate the array
+        NULL
     };
-
-    // Execute the commands one after the other
-    for (int i = 0; none[i] != NULL; ++i) {
-        execute_command(none[i]);
+    for (int i = 0; commands[i] != NULL; ++i)
+    {
+        execute_command(commands[i]);
     }
 
     return 0;

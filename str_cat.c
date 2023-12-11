@@ -10,7 +10,7 @@
  * Return: Modified string.
  */
 
-char *_strcat(char *dest, char *src)
+char *str_cat(char *dest, char *src)
 {
 	int i, j, k;
 

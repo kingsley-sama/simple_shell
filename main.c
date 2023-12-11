@@ -23,7 +23,7 @@ int main(void)
 			perror("getline error");
 			free(input);
 		}
-		dispatcher(input);
+		
 		free(input);
 		putchar('\n');
 	} while (1);

@@ -1,14 +1,12 @@
 #include "shell.h"
 #include <stdlib.h>
 #include <string.h>
-
 /**
- * _strdup - Duplicate it's string input.
- * @str: String input.
-
- * Return: A pointer to the duplicate
+ *str_dup - creates a duplicate of it's string input
+ *@str: string input
+ *Return: a pointer to the duplicate
  */
-char *str_dup(char *str)
+char *str_dup(const char *str)
 {
 	unsigned int i, size;
 	char *arr;
@@ -16,7 +14,7 @@ char *str_dup(char *str)
 	if (str == NULL)
 	{
 		arr = "";
-		return (str);
+		return ((char *)str);
 	}
 	arr = (char *) malloc(sizeof(char) * (strlen(str) + 1));
 	size = strlen(str);

@@ -12,5 +12,9 @@ char *str_tok(char *str, const char *delimiters);
 int str_cmp(char *dest, char *src);
 int str_len(const char *s);
 char *str_dup(const char *str);
-char* find_command(const char *command);
+char *str_cat(char *dest, char *src);
+char *find_command(const char *command);
+void free_tokens(char **tokens);
+char **tokenize_command(const char *command);
+char** parse_command(const char *command);
 #endif

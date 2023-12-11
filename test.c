@@ -109,13 +109,12 @@ void execute_command(const char *command) {
  * 
  * Return:0
  */
-int main() {
+int call(char *input) {
     char *commands[] = {
         "ls -l -a",
         "ls -la",
         "echo Hello World\"\n\'",
         "gcc -v",
-        // Add more commands as needed
         NULL  // NULL-terminate the array
     };
 

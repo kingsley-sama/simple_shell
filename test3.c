@@ -139,63 +139,57 @@ void free_tokens(char **tokens) {
  *
  * Return: void.
  */
-void execute_command(const char *command) {
-	char *full_command = find_command(command);
+/* void execute_command(const char *command) { */
+/* 	char *full_command = find_command(command); */
     
-	if (full_command == NULL) {
-		fprintf(stderr, "Command '%s' not found\n", command);
-		return;
-	}
+/* 	if (full_command == NULL) { */
+/* 		fprintf(stderr, "Command '%s' not found\n", command); */
+/* 		return; */
+/* 	} */
     
-	pid_t pid = fork();
+/* 	pid_t pid = fork(); */
 
-	if (pid == -1) {
-		perror("fork");
-		exit(EXIT_FAILURE);
-	} else if (pid == 0) {
-		// Child process
-		// Tokenize the command into subcommands and arguments
-		char **args = tokenize_command(full_command);
+/* 	if (pid == -1) { */
+/* 		perror("fork"); */
+/* 		exit(EXIT_FAILURE); */
+/* 	} else if (pid == 0) { */
+/* 		// Child process */
+/* 		// Tokenize the command into subcommands and arguments */
+/* 		char **args = tokenize_command(full_command); */
 
-		// Execute the command
-		if (args[0] != NULL && execvp(args[0], args) == -1) {
-			perror("execvp");
-			exit(EXIT_FAILURE);
-		}
+/* 		// Execute the command */
+/* 		if (args[0] != NULL && execvp(args[0], args) == -1) { */
+/* 			perror("execvp"); */
+/* 			exit(EXIT_FAILURE); */
+/* 		} */
 
-		// Free the allocated memory for command arguments
-		free_tokens(args);
-		exit(EXIT_SUCCESS);
-	} else {
-		// Parent process
-		int status;
-		waitpid(pid, &status, 0);
-		if (WIFEXITED(status)) {
-			printf("Command exited with status %d\n", WEXITSTATUS(status));
-		}
-	}
+/* 		// Free the allocated memory for command arguments */
+/* 		free_tokens(args); */
+/* 		exit(EXIT_SUCCESS); */
+/* 	} else { */
+/* 		// Parent process */
+/* 		int status; */
+/* 		waitpid(pid, &status, 0); */
+/* 		if (WIFEXITED(status)) { */
+/* 			printf("Command exited with status %d\n", WEXITSTATUS(status)); */
+/* 		} */
+/* 	} */
 
-	free(full_command);
-}
+/* 	free(full_command); */
+/* } */
 
 /**
  * main- Entry point.
  * 
  * Return:0
  */
-int main() {
+int take(char *in) {
 	char input[MAX_COMMAND_LENGTH];
-
-	// Tokenize the command
-	char **commands = tokenize_command(input);
-
-	// Execute the commands one after the other
+	char **commands = parse_command(in);
 	for (int i = 0; commands[i] != NULL; ++i) {
-		execute_command(commands[i]);
+		exec_command(commands[i]);
 	}
 
-	// Free the allocated memory
 	free_tokens(commands);
-
 	return 0;
 }

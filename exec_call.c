@@ -2,7 +2,8 @@
 #include <unistd.h>
 #include "shell.h"
 #include <sys/wait.h>
-void exec_command(const char *command) {
+void exec_command(const char *command)
+{
 	char *prog_path;
 	
 	prog_path = find_command(command);
@@ -16,7 +17,7 @@ void exec_command(const char *command) {
 	}
 	else if (pid == 0)
 	{
-		char **args = tokenize_command(command);
+		char **args = parse_command(command);
 		if (execv(prog_path, args) == -1)
 		{
 			perror("execv");

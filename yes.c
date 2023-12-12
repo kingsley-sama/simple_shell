@@ -1,14 +1,11 @@
 #include "shell.h"
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
-#include <sys/wait.h>
+#include <stdio.h>
+#include <stdlib.h>
+#define MAX_TOKENS 128
 #define MAX_COMMAND_LENGTH 100
-
-
-
-char **parse_sb_command(const char *command)
+char **parse_sub_command(const char *command)
 {
 	char **tokens = malloc(sizeof(char *) * MAX_COMMAND_LENGTH);
 	int token_count = 0;
@@ -48,15 +45,12 @@ char **parse_sb_command(const char *command)
 			tokens[token_count] = quoted_token;
 			token_count++;
 		} else if (subtoken[0] == '\\' && subtoken[1] != '\0') {
-			// Handle escape characters
 			char *next_subtoken = strtok(NULL, delimiter_space);
 			if (next_subtoken != NULL) {
-				// Concatenate the next subtoken to the current one
 				subtoken = realloc(subtoken, strlen(subtoken) + strlen(next_subtoken) + 2);
 				strcat(subtoken, next_subtoken);
 			}
 		} else {
-			// Handle regular tokens
 			tokens = realloc(tokens, sizeof(char *) * (token_count + 1));
 
 			if (tokens == NULL) {
@@ -70,17 +64,57 @@ char **parse_sb_command(const char *command)
 
 		subtoken = strtok(NULL, delimiter_space);
 	}
-
-	// Don't forget to free the copied command
 	free(command_copy);
-
-	// Add a NULL pointer at the end to indicate the end of the array
 	tokens = realloc(tokens, sizeof(char *) * (token_count + 1));
 	if (tokens == NULL) {
 		fprintf(stderr, "Memory allocation failed\n");
 		exit(EXIT_FAILURE);
 	}
 	tokens[token_count] = NULL;
-
 	return tokens;
+}
+
+char **parse_command(const char *str) {
+  char **tokens = malloc(sizeof(char *) * MAX_TOKENS);
+  if (!tokens) {
+    fprintf(stderr, "Memory allocation failed\n");
+    exit(1);
+  }
+
+  int i = 1;
+  char *token = strtok(strdup(str), ";");
+  tokens[0] = token;
+  while (str[i]  != '\0')
+  {
+	  token = strtok(NULL, ";");
+	  tokens[i] = token;
+	  i++;
+  }
+  return tokens;
+}
+
+
+/**
+ * free_token- Frees the allocated memory.
+ * @tokens: A pointer to the string(tokens)
+ *
+ * Return: void.
+ */
+void free_tokens(char **tokens) {
+	if (tokens == NULL) {
+		return;
+	}
+	free(tokens);
+}
+
+void call_command(const char *str )
+{
+	char **tokens = parse_command(str);
+	char **sub_commands = NULL;
+	for (int i = 0; tokens[i] != NULL; i++)
+	{
+		sub_commands = parse_sub_command(tokens[i]);
+		printf("Token %d: %s\n", i + 1, tokens[i]);
+	}
+	free_tokens(tokens);
 }

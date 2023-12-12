@@ -19,5 +19,6 @@ void free_tokens(char **tokens);
 char **tokenize_command(const char *command);
 char **parse_command(const char *command);
 char *str_cpy(char *dest, char *src);
-void exec_command(const char *command);
+void exec_command(char **command);
+
 #endif

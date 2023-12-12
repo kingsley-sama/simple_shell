@@ -1,12 +1,12 @@
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include "shell.h"
 #include <sys/wait.h>
-void exec_command(const char *command)
+void exec_command(char **command)
 {
 	char *prog_path;
-	
-	prog_path = find_command(command);
+	prog_path = find_command(command[0]);
     	if (prog_path == NULL)
 		return;
 	pid_t pid = fork();
@@ -17,13 +17,12 @@ void exec_command(const char *command)
 	}
 	else if (pid == 0)
 	{
-		char **args = parse_command(command);
-		if (execv(prog_path, args) == -1)
+
+		if (execv(prog_path, command) == -1)
 		{
 			perror("execv");
 			exit(EXIT_FAILURE);
 		}
-		free_tokens(args);
 	}
 	else
 	{

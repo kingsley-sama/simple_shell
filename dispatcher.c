@@ -114,25 +114,24 @@ void strip_newline(char *str) {
 }
 
 void call_command(const char *str) {
-    // Duplicate the input string to avoid modifying the original
-    char *input_copy = strdup(str);
-    if (input_copy == NULL) {
-        perror("strdup");
-        exit(EXIT_FAILURE);
-    }
+	// Duplicate the input string to avoid modifying the original
+	char *input_copy = strdup(str);
+	if (input_copy == NULL) {
+		perror("strdup");
+		exit(EXIT_FAILURE);
+	}
 
-    strip_newline(input_copy);
+	strip_newline(input_copy);
 
-    char **tokens = parse_command(input_copy);
-    char **sub_commands = NULL;
+	char **tokens = parse_command(input_copy);
+	char **sub_commands = NULL;
 
-    for (int i = 0; tokens[i] != NULL; i++) {
-        sub_commands = parse_sub_command(tokens[i]);
-        exec_command(sub_commands);
-        printf("Token %d %d: %s\n", i + 1, (int)strlen(sub_commands[0]), sub_commands[0]);
-    }
+	for (int i = 0; tokens[i] != NULL; i++) {
+		sub_commands = parse_sub_command(tokens[i]);
+		exec_command(sub_commands);
+	}
 
-    free_tokens(tokens);
-    free(input_copy);
+	free_tokens(tokens);
+	free(input_copy);
 }
 

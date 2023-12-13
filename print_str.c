@@ -3,6 +3,7 @@
 #include <unistd.h>
 /**
  * print_str -Print string.
+ * @str: The source string.
  *
  * Return: Void
  */
@@ -12,8 +13,7 @@ void print_str(char *str)
 
 	while (str[i] != '\0' && str[i] != '\n')
 	{
-		i++;
+	i++;
 	}
 	write(STDOUT_FILENO, str, i);
-
 }

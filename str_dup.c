@@ -13,19 +13,19 @@ char *str_dup(const char *str)
 
 	if (str == NULL)
 	{
-		arr = "";
-		return ((char *)str);
+	arr = "";
+	return ((char *)str);
 	}
 	arr = (char *) malloc(sizeof(char) * (strlen(str) + 1));
 	size = strlen(str);
 	if (arr == NULL)
 	{
-		return (NULL);
+	return (NULL);
 	}
 	else
 	{
-		for (i = 0; i < size; i++)
-			arr[i] = str[i];
-		return (arr);
+	for (i = 0; i < size; i++)
+	arr[i] = str[i];
+	return (arr);
 	}
 }

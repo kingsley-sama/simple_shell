@@ -14,9 +14,9 @@ char *_strchr(char *s, char c)
 
 	while (s[i] != '\0')
 	{
-		if (s[i] == c)
-			array[i] = s[i + 1];
-
+	if (s[i] == c)
+	array[i] = s[i + 1];
 	}
+
 	return (NULL);
 }

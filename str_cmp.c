@@ -14,9 +14,9 @@ int str_cmp(char *dest, char *src)
 
 	while (src[i] != '\0')
 	{
-		if (dest[i] != src[i])
-			return (-1);
-		i++;
+	if (dest[i] != src[i])
+	return (-1);
+	i++;
 	}
 	return (0);
 }

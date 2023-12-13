@@ -11,9 +11,9 @@ void print_str(char *str)
 {
 	unsigned int i = 0;
 
-	while (str[i] != '\0' && str[i] != '\n')
+	while (str[i] != '\0')
 	{
-	i++;
+		i++;
 	}
 	write(STDOUT_FILENO, str, i);
 }

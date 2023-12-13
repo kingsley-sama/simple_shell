@@ -1,8 +1,7 @@
-#include "shell.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <string.h>
+#include <unistd.h>
 
 /**
  * find_command - Command that finds a path.
@@ -11,51 +10,57 @@
  */
 char *find_command(const char *command)
 {
-	char *token;
-	char *exec_path;
-	char *path = getenv("PATH");
-	char *path_copy;
+    char *token, *exec_path, *path_copy, *path = getenv("PATH");
 
-	if (path == NULL)
-	return (NULL);
+    if (command[0] == '/')
+    {
+        if (access(command, X_OK) == 0)
+            return strdup(command);
+        else
+            return NULL;
+    }
 
-	printf("%s\n", path);
+    if (path == NULL)
+        return NULL;
 
-	path_copy = strdup(path);
-	if (path_copy == NULL)
-	{
-	perror("Memory allocation failed");
-	return (NULL);
-	}
+    path_copy = strdup(path);
+    if (path_copy == NULL)
+        return NULL;
 
-	token = strtok(path_copy, ":");
-	exec_path = (char *)malloc(strlen(token) + strlen(command) + 2);
+    token = strtok(path_copy, ":");
+    exec_path = NULL;
 
-	if (exec_path == NULL)
-	{
-	perror("Memory allocation failed");
-	free(path_copy);
-	return (NULL);
-	}
+    while (token != NULL)
+    {
+        size_t exec_path_size = strlen(token) + strlen(command) + 2;
+        char *new_exec_path = (char *)realloc(exec_path, exec_path_size);
 
-	while (token != NULL)
-	{
-	strcpy(exec_path, token);
-	strcat(exec_path, "/");
-	strcat(exec_path, command);
+        if (new_exec_path == NULL)
+        {
+            free(exec_path);
+            free(path_copy);
+            return NULL;
+        }
 
-	if (access(exec_path, X_OK) == 0)
-	{
-	printf("%s", exec_path);
-	free(path_copy);
-	printf("this is :%s\n", exec_path);
-	return (exec_path);
-	}
+        exec_path = new_exec_path;
 
-	token = strtok(NULL, ":");
-	}
+        strcpy(exec_path, token);
+        strcat(exec_path, "/");
+        strcat(exec_path, command);
 
-	free(exec_path);
-	free(path_copy);
-	return (NULL);
+        if (access(exec_path, X_OK) == 0)
+        {
+            free(path_copy);
+            return exec_path;
+        }
+
+        token = strtok(NULL, ":");
+    }
+
+    free(exec_path); 
+    free(path_copy);
+    return NULL;
 }
+
+
+

@@ -2,6 +2,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 /**
  * main - HSH entry point.
@@ -21,8 +22,11 @@ int main(void)
 		if (getline_val == -1)
 		{
 		}
+		if (strlen(input) > 0 && input[strlen(input) - 1] == '\n') {
+			input[strlen(input) - 1] = '\0';
+		}
 		print_str("got here 0");
-		take(input);
+		call_command(input);
 		free(input);
 		putchar('\n');
 	} while (1);

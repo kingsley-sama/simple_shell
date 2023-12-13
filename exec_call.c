@@ -18,7 +18,7 @@ void exec_command(char **command)
 	else if (pid == 0)
 	{
 
-		if (execv(prog_path, command) == -1)
+		if (execve(prog_path, command, NULL) == -1)
 		{
 			perror("execv");
 			exit(EXIT_FAILURE);

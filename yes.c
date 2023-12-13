@@ -106,15 +106,33 @@ void free_tokens(char **tokens) {
 	}
 	free(tokens);
 }
-
-void call_command(const char *str )
-{
-	char **tokens = parse_command(str);
-	char **sub_commands = NULL;
-	for (int i = 0; tokens[i] != NULL; i++)
-	{
-		sub_commands = parse_sub_command(tokens[i]);
-		printf("Token %d: %s\n", i + 1, tokens[i]);
-	}
-	free_tokens(tokens);
+void strip_newline(char *str) {
+    size_t len = strlen(str);
+    if (len > 0 && str[len - 1] == '\n') {
+        str[len - 1] = '\0';  // Replace newline with null terminator
+    }
 }
+
+void call_command(const char *str) {
+    // Duplicate the input string to avoid modifying the original
+    char *input_copy = strdup(str);
+    if (input_copy == NULL) {
+        perror("strdup");
+        exit(EXIT_FAILURE);
+    }
+
+    strip_newline(input_copy);
+
+    char **tokens = parse_command(input_copy);
+    char **sub_commands = NULL;
+
+    for (int i = 0; tokens[i] != NULL; i++) {
+        sub_commands = parse_sub_command(tokens[i]);
+        exec_command(sub_commands);
+        printf("Token %d %d: %s\n", i + 1, (int)strlen(sub_commands[0]), sub_commands[0]);
+    }
+
+    free_tokens(tokens);
+    free(input_copy);
+}
+

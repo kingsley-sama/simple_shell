@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-int take(char *in);
+void call_command(const char *str );
 void print_str(char *str);
 void perror_msg(char *msg);
 void dispatcher(char *str);

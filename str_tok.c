@@ -13,11 +13,9 @@
 char *str_tok(char *str, const char *delimiters)
 {
 	static char *str_start;
-
-	str_start = NULL;
-
 	char *initial_token;
 
+	str_start = NULL;
 	if (str == NULL)
 	{
 	str = str_start;

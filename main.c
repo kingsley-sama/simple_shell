@@ -17,19 +17,22 @@ int main(int argc, char *argv[])
 	char *exit_call = "exit";
 	ssize_t getline_val;
 	size_t input_size = 0;
+	(void)argc;
+	(void)argv;
 
-	do
-	{
+	do {
 		if (is_interactive)
 		{
 			print_str("($)");
 		}
 		getline_val = getline(&input, &input_size, stdin);
-		if (getline_val == -1 || strcmp(input, exit_call) == 0) {
-			if (is_interactive) {
+		if (getline_val == -1 || strcmp(input, exit_call) == 0)
+		{
+			if (is_interactive)
+			{
 				if (getline_val == -1)
 					putchar('\n');
-				
+
 			}
 			break;
 		}
@@ -40,5 +43,5 @@ int main(int argc, char *argv[])
 		if (is_interactive)
 			putchar('\n');
 	} while (is_interactive);
-	return 0;
+	return (0);
 }

@@ -1,4 +1,4 @@
-#include "header.h"
+#include "shell.h"
 
 /**
  * separator - Separates command recieved from stdin by ;
@@ -12,7 +12,7 @@ char **separator(char *input)
 	int i;
 	int buffsize = BUFSIZE;
 
-	if (input[0] == ' ' && input[_strlen(input)] == ' ')
+	if (input[0] == ' ' && input[str_len(input)] == ' ')
 		exit(0);
 	if (input == NULL)
 		return (NULL);
@@ -23,11 +23,11 @@ char **separator(char *input)
 		perror("hsh");
 		return (NULL);
 	}
-	command = _strtok(input, ";&");
+	command = str_tok(input, ";&");
 	for (i = 0; command; i++)
 	{
 		commands[i] = command;
-		command = _strtok(NULL, ";&");
+		command = str_tok(NULL, ";&");
 	}
 	commands[i] = NULL;
 

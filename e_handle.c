@@ -1,4 +1,5 @@
-#include "header.h"
+
+#include "shell.h"
 
 /**
  * print_error - Displays error message
@@ -9,16 +10,16 @@
 
 void print_error(char *input, int counter, char **argv)
 {
-	char *er;
+	char *a;
 
-	PRINT(argv[0]);
-	PRINT(": ");
-	er = _itoa(counter);
-	PRINT(er);
-	free(er);
-	PRINT(": ");
-	PRINT(input);
-	PRINT(": not found\n");
+	print_str(argv[0]);
+	print_str(": ");
+	a = ito_a(counter);
+	print_str(a);
+	free(a);
+	print_str(": ");
+	print_str(input);
+	print_str(": not found\n");
 }
 
 /**
@@ -30,17 +31,17 @@ void print_error(char *input, int counter, char **argv)
 
 void _prerror(char **argv, int c, char **cmd)
 {
-	char *er = _itoa(c);
+	char *error = ito_a(c);
 
-	PRINT(argv[0]);
-	PRINT(": ");
-	PRINT(er);
-	PRINT(": ");
-	PRINT(cmd[0]);
-	PRINT(": Illegal number: ");
-	PRINT(cmd[1]);
-	PRINT("\n");
-	free(er);
+	print_str(argv[0]);
+	print_str(": ");
+	print_str(error);
+	print_str(": ");
+	print_str(cmd[0]);
+	print_str(": Illegal number: ");
+	print_str(cmd[1]);
+	print_str("\n");
+	free(error);
 }
 
 /**
@@ -50,13 +51,13 @@ void _prerror(char **argv, int c, char **cmd)
  */
 void error_file(char **argv, int c)
 {
-	char *er = _itoa(c);
+	char *b = ito_a(c);
 
-	PRINT(argv[0]);
-	PRINT(": ");
-	PRINT(er);
-	PRINT(": Can't open ");
-	PRINT(argv[1]);
-	PRINT("\n");
-	free(er);
+	print_str(argv[0]);
+	print_str(": ");
+	print_str(b);
+	print_str(": Can't open ");
+	print_str(argv[1]);
+	print_str("\n");
+	free(b);
 }

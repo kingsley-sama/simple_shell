@@ -1,4 +1,4 @@
-#include "header.h"
+#include "shell.h"
 
 /**
  * print_number - Prints unsigned integers using _putchar function
@@ -11,11 +11,11 @@ void print_number(unsigned int n)
 	if ((x / 10) > 0)
 		print_number(x / 10);
 
-	_putchar(x % 10 + '0');
+	put_char(x % 10 + '0');
 }
 
 /**
- * print_number_int - Prints integers using _putchar function
+ * print_number_int - Prints integers using put_char function
  * @n: Integer to be printed
  */
 void print_number_int(int n)
@@ -24,13 +24,13 @@ void print_number_int(int n)
 
 	if (n < 0)
 	{
-		_putchar('-');
+		put_char('-');
 		x = -x;
 	}
 	if ((x / 10) > 0)
 		print_number(x / 10);
 
-	_putchar(x % 10 + '0');
+	put_char(x % 10 + '0');
 }
 
 /**

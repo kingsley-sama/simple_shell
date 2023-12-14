@@ -1,5 +1,4 @@
-#include "header.h"
-
+#include "shell.h"
 /**
  * read_file - Reads commands from the argument File
  * @file: File containing commands
@@ -10,19 +9,19 @@ void read_file(char *file, char **argv)
 {
 	FILE *fp;
 	char *line = NULL;
-	size_t len = 0;
-	int count = 0;
+	size_t s_len = 0;
+	int i = 0;
 
 	fp = fopen(file, "r");
 	if (fp == NULL)
 	{
-		error_file(argv, count);
+		error_file(argv, i);
 		exit(127);
 	}
-	while ((getline(&line, &len, fp)) != -1)
+	while ((getline(&line, &s_len, fp)) != -1)
 	{
-		count++;
-		treat_file(line, count, fp, argv);
+		i++;
+		treat_file(line, i, fp, argv);
 	}
 	if (line)
 		free(line);
@@ -33,37 +32,37 @@ void read_file(char *file, char **argv)
 /**
  * treat_file - Parse commands and handle their execution
  * @line: Line from file
- * @count: Error counter
+ * @i: Error ier
  * @fp: File descriptor
  * @argv: Command line arguments
  */
-void treat_file(char *line, int count, FILE *fp, char **argv)
+void treat_file(char *line, int i, FILE *fp, char **argv)
 {
-	char **cmd;
+	char **command_line;
 	int stat = 0;
 
-	cmd = parse_cmd(line);
-	if (_strncmp(cmd[0], "exit", 4) == 0)
-		exit_bul_for_file(cmd, line, fp);
-	else if (check_builtin(cmd) == 0)
+	command_line = parse_cmd(line);
+	if (strn_cmp(command_line[0], "exit", 4) == 0)
+		exit_bull(command_line, line, fp);
+	else if (check_builtin(command_line) == 0)
 	{
-		stat = handle_builtin(cmd, stat);
-		free(cmd);
+		stat = handle_builtin(command_line, stat);
+		free(command_line);
 	}
 	else
 	{
-		stat = check_cmd(cmd, line, count, argv);
-		free(cmd);
+		stat = check_cmd(command_line, line, i, argv);
+		free(command_line);
 	}
 }
 
 /**
- * exit_bul_for_file - Exit status handler for file input
+ * exit_bull - Exit status handler for file input
  * @line: Line from a file
  * @cmd: Parsed command
  * @fd: File Descriptor
  */
-void exit_bul_for_file(char **cmd, char *line, FILE *fd)
+void exit_bull(char **cmd, char *line, FILE *fd)
 {
 	int status;
 	int i = 0;
@@ -77,10 +76,10 @@ void exit_bul_for_file(char **cmd, char *line, FILE *fd)
 	}
 	while (cmd[1][i])
 	{
-		if (_isalpha(cmd[1][i++]) < 0)
+		if (is_alpha(cmd[1][i++]) < 0)
 			perror("Illegal number");
 	}
-	status = _atoi(cmd[1]);
+	status = ato_i(cmd[1]);
 	free(line);
 	free(cmd);
 	fclose(fd);

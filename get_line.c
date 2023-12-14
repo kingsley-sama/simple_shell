@@ -1,10 +1,10 @@
-#include "header.h"
+#include "shell.h"
 
 /**
  * _getline - read input from standard input by user
  * Return: the input on a buffer
  */
-char *_getline()
+char *get_line()
 {
 	int i, rd, buffsize = BUFSIZE;
 	char c = 0, *buffer, *buf;
@@ -65,7 +65,7 @@ char *space(char *str)
 	int i, j = 0;
 	char *buff;
 
-	buff = malloc(sizeof(char) * (_strlen(str) + 1));
+	buff = malloc(sizeof(char) * (str_len(str) + 1));
 	if (buff == NULL)
 	{
 		free(buff);

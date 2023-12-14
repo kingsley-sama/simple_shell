@@ -6,12 +6,12 @@
  * @s2: second string
  * Return: 0 if identical otherwise how much diffrent
  */
-int _strcmp(char *s1, char *s2)
+int str_cmp(char *s1, char *s2)
 {
 	int cmp = 0, i, len1, len2;
 
-	len1 = _strlen(s1);
-	len2 = _strlen(s2);
+	len1 = str_len(s1);
+	len2 = str_len(s2);
 
 	if (s1 == NULL || s2 == NULL)
 		return (1);
@@ -34,11 +34,11 @@ int _strcmp(char *s1, char *s2)
 }
 
 /**
- * _isalpha - function to check if c is alphabet
+ * is_alpha - function to check if c is alphabet
  * @c: character to check
  * Return: 1 if true 0 if false
  */
-int _isalpha(int c)
+int is_alpha(int c)
 {
 	if (((c >= 97) && (c <= 122)) || ((c >= 65) && (c <= 90)))
 	{
@@ -51,11 +51,11 @@ int _isalpha(int c)
 }
 
 /**
- * _itoa - funciton that convert integer to character
+ * ito_a - funciton that convert integer to character
  * @n: integer to convert
  * Return: character pointer
  */
-char *_itoa(unsigned int n)
+char *ito_a(unsigned int n)
 {
 	int len = 0, i = 0;
 	char *s;
@@ -78,18 +78,18 @@ char *_itoa(unsigned int n)
 	}
 
 	s[i] = (n % 10) + '0';
-	array_rev(s, len);
+	rev(s, len);
 	s[i + 1] = '\0';
 
 	return (s);
 }
 
 /**
- * array_rev - function reverse an array
+ * rev - function reverse an array
  * @arr: array to reverse
  * @len: length of array
  */
-void array_rev(char *arr, int len)
+void rev(char *arr, int len)
 {
 	int i;
 	char tmp;

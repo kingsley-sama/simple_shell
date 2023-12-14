@@ -1,4 +1,4 @@
-#include "header.h"
+#include "shell.h"
 
 /**
  * path_cmd -  Search In $PATH for executable command
@@ -7,23 +7,23 @@
  */
 int path_cmd(char **cmd)
 {
-	char *path, *value, *cmd_path;
+	char *path, *value, *command_path;
 	struct stat buf;
 
-	path = _getenv("PATH");
-	value = _strtok(path, ":");
+	path = get_env("PATH");
+	value = str_tok(path, ":");
 	while (value != NULL)
 	{
-		cmd_path = build(*cmd, value);
-		if (stat(cmd_path, &buf) == 0)
+		command_path = build(*cmd, value);
+		if (stat(command_path, &buf) == 0)
 		{
-			*cmd = _strdup(cmd_path);
-			free(cmd_path);
+			*cmd = str_dup(command_path);
+			free(command_path);
 			free(path);
 			return (0);
 		}
-		free(cmd_path);
-		value = _strtok(NULL, ":");
+		free(command_path);
+		value = str_tok(NULL, ":");
 	}
 	free(path);
 	free(value);
@@ -38,43 +38,43 @@ int path_cmd(char **cmd)
  */
 char *build(char *token, char *value)
 {
-	char *cmd;
+	char *command_line;
 	size_t len;
 
-	len = _strlen(value) + _strlen(token) + 2;
-	cmd = malloc(sizeof(char) * len);
-	if (cmd == NULL)
+	len = str_len(value) + str_len(token) + 2;
+	command_line = malloc(sizeof(char) * len);
+	if (command_line == NULL)
 	{
-		free(cmd);
+		free(command_line);
 		return (NULL);
 	}
 
-	memset(cmd, 0, len);
+	memset(command_line, 0, len);
 
-	cmd = _strcat(cmd, value);
-	cmd = _strcat(cmd, "/");
-	cmd = _strcat(cmd, token);
+	command_line = str_cat(command_line, value);
+	command_line = str_cat(command_line, "/");
+	command_line = str_cat(command_line, token);
 
-	return (cmd);
+	return (command_line);
 }
 
 /**
- * _getenv - Gets the value of environment variable by name
+ * get_env - Gets the value of environment variable by name
  * @name: Environment variable name
  * Return: The value of the environment variable or NULL if failed
  */
-char *_getenv(char *name)
+char *get_env(char *name)
 {
 	size_t name_len, value_len;
 	char *value;
 	int i, j, k;
 
-	name_len = _strlen(name);
+	name_len = str_len(name);
 	for (i = 0 ; environ[i]; i++)
 	{
-		if (_strncmp(name, environ[i], name_len) == 0)
+		if (strn_cmp(name, environ[i], name_len) == 0)
 		{
-			value_len = _strlen(environ[i]) - name_len;
+			value_len = str_len(environ[i]) - name_len;
 			value = malloc(sizeof(char) * value_len);
 			if (!value)
 			{

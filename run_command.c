@@ -1,4 +1,4 @@
-#include "header.h"
+#include "shell.h"
 
 /**
  * change_dir - Changes directory
@@ -13,7 +13,7 @@ int change_dir(char **cmd, __attribute__((unused))int st)
 
 	if (cmd[1] == NULL)
 		value = chdir(getenv("HOME"));
-	else if (_strcmp(cmd[1], "-") == 0)
+	else if (str_cmp(cmd[1], "-") == 0)
 	{
 		value = chdir(getenv("OLDPWD"));
 	}
@@ -47,7 +47,7 @@ int dis_env(__attribute__((unused)) char **cmd, __attribute__((unused)) int st)
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		len = _strlen(environ[i]);
+		len = str_len(environ[i]);
 		write(1, environ[i], len);
 		write(STDOUT_FILENO, "\n", 1);
 	}
@@ -65,19 +65,19 @@ int echo_bul(char **cmd, int st)
 	char *path;
 	unsigned int pid = getppid();
 
-	if (_strncmp(cmd[1], "$?", 2) == 0)
+	if (strn_cmp(cmd[1], "$?", 2) == 0)
 	{
 		print_number_int(st);
 		PRINT("\n");
 	}
-	else if (_strncmp(cmd[1], "$$", 2) == 0)
+	else if (strn_cmp(cmd[1], "$$", 2) == 0)
 	{
 		print_number(pid);
 		PRINT("\n");
 	}
-	else if (_strncmp(cmd[1], "$PATH", 5) == 0)
+	else if (strn_cmp(cmd[1], "$PATH", 5) == 0)
 	{
-		path = _getenv("PATH");
+		path = get_env("PATH");
 		PRINT(path);
 		PRINT("\n");
 		free(path);
@@ -101,7 +101,7 @@ int history_dis(__attribute__((unused))char **c, __attribute__((unused))int st)
 	char *line = NULL;
 	size_t len = 0;
 	int counter = 0;
-	char *er;
+	char *a;
 
 	fp = fopen(filename, "r");
 	if (fp == NULL)
@@ -111,9 +111,9 @@ int history_dis(__attribute__((unused))char **c, __attribute__((unused))int st)
 	while ((getline(&line, &len, fp)) != -1)
 	{
 		counter++;
-		er = _itoa(counter);
-		PRINT(er);
-		free(er);
+		a = ito_a(counter);
+		PRINT(a);
+		free(a);
 		PRINT(" ");
 		PRINT(line);
 	}

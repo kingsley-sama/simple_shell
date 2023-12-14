@@ -1,4 +1,4 @@
-#include "header.h"
+#include "shell.h"
 
 /**
  * main - Entry point to program
@@ -19,7 +19,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 		count++;
 		if (isatty(STDIN_FILENO))
 			prompt();
-		input = _getline();
+		input = get_line();
 		if (input[0] == '\0')
 			continue;
 		history(input);
@@ -27,7 +27,7 @@ int main(__attribute__((unused)) int argc, char **argv)
 		for (i = 0; commands[i] != NULL; i++)
 		{
 			cmd = parse_cmd(commands[i]);
-			if (_strcmp(cmd[0], "exit") == 0)
+			if (str_cmp(cmd[0], "exit") == 0)
 			{
 				free(commands);
 				exit_bul(cmd, input, argv, count, stat);

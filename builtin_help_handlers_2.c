@@ -1,4 +1,4 @@
-#include "header.h"
+#include "shell.h"
 
 /**
  * help_env - Displays information on the shell by builtin command 'env'
@@ -7,7 +7,7 @@ void help_env(void)
 {
 	char *msg = "env: env\n\tPrints the current environment.\n";
 
-	write(STDOUT_FILENO, msg, _strlen(msg));
+	write(STDOUT_FILENO, msg, str_len(msg));
 }
 
 /**
@@ -17,11 +17,11 @@ void help_setenv(void)
 {
 	char *msg = "setenv: setenv [VARIABLE] [VALUE]\n\tInitializes a new";
 
-	write(STDOUT_FILENO, msg, _strlen(msg));
+	write(STDOUT_FILENO, msg, str_len(msg));
 	msg = "environment variable, or modifies an existing one.\n\n";
-	write(STDOUT_FILENO, msg, _strlen(msg));
+	write(STDOUT_FILENO, msg, str_len(msg));
 	msg = "\tUpon failure, prints a message to stderr.\n";
-	write(STDOUT_FILENO, msg, _strlen(msg));
+	write(STDOUT_FILENO, msg, str_len(msg));
 }
 
 /**
@@ -32,11 +32,11 @@ void help_unsetenv(void)
 {
 	char *msg = "unsetenv: unsetenv [VARIABLE]\n\tRemoves an ";
 
-	write(STDOUT_FILENO, msg, _strlen(msg));
+	write(STDOUT_FILENO, msg, str_len(msg));
 	msg = "environmental variable.\n\n\tUpon failure, prints a ";
-	write(STDOUT_FILENO, msg, _strlen(msg));
+	write(STDOUT_FILENO, msg, str_len(msg));
 	msg = "message to stderr.\n";
-	write(STDOUT_FILENO, msg, _strlen(msg));
+	write(STDOUT_FILENO, msg, str_len(msg));
 }
 
 /**
@@ -49,19 +49,19 @@ int display_help(char **cmd, __attribute__((unused))int st)
 {
 	if (!cmd[1])
 		help_all();
-	else if (_strcmp(cmd[1], "alias") == 0)
+	else if (str_cmp(cmd[1], "alias") == 0)
 		help_alias();
-	else if (_strcmp(cmd[1], "cd") == 0)
+	else if (str_cmp(cmd[1], "cd") == 0)
 		help_cd();
-	else if (_strcmp(cmd[1], "exit") == 0)
+	else if (str_cmp(cmd[1], "exit") == 0)
 		help_exit();
-	else if (_strcmp(cmd[1], "env") == 0)
+	else if (str_cmp(cmd[1], "env") == 0)
 		help_env();
-	else if (_strcmp(cmd[1], "setenv") == 0)
+	else if (str_cmp(cmd[1], "setenv") == 0)
 		help_setenv();
-	else if (_strcmp(cmd[1], "unsetenv") == 0)
+	else if (str_cmp(cmd[1], "unsetenv") == 0)
 		help_unsetenv();
-	else if (_strcmp(cmd[1], "help") == 0)
+	else if (str_cmp(cmd[1], "help") == 0)
 		help_help();
 	return (0);
 }

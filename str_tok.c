@@ -1,5 +1,4 @@
-#include "header.h"
-
+#include "shell.h"
 /**
  * check_delim - function that checks if a character matchs any character
  * @c: character to check
@@ -19,12 +18,12 @@ unsigned int check_delim(char c, const char *str)
 }
 
 /**
- * _strtok - function that extracts tokens of a string
+ * str_tok - function that extracts tokens of a string
  * @str: string
  * @delim: delimiter
  * Return: pointer to the next token or NULL
  */
-char *_strtok(char *str, const char *delim)
+char *str_tok(char *str, const char *delim)
 {
 	static char *tokens;
 	static char *new_token;

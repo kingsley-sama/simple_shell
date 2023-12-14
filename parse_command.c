@@ -1,4 +1,4 @@
-#include "header.h"
+#include "shell.h"
 
 /**
  * parse_cmd - Parses the command recieved from stdin
@@ -12,7 +12,7 @@ char **parse_cmd(char *input)
 	int i;
 	int buffsize = BUFSIZE;
 
-	if (input[0] == ' ' && input[_strlen(input)] == ' ')
+	if (input[0] == ' ' && input[str_len(input)] == ' ')
 		exit(0);
 	if (input == NULL)
 		return (NULL);
@@ -23,11 +23,11 @@ char **parse_cmd(char *input)
 		perror("hsh");
 		return (NULL);
 	}
-	argument = _strtok(input, "\n\t\r\a ");
+	argument = str_tok(input, "\n\t\r\a ");
 	for (i = 0; argument; i++)
 	{
 		arguments[i] = argument;
-		argument = _strtok(NULL, "\n\t\r\a ");
+		argument = str_tok(NULL, "\n\t\r\a ");
 	}
 	arguments[i] = NULL;
 

@@ -1,4 +1,4 @@
-#include "header.h"
+#include "shell.h"
 
 /**
  * check_cmd - Excutes commands found in predefined path
@@ -23,7 +23,7 @@ int check_cmd(char **cmd, char *input, int c, char **argv)
 	}
 	if (pid == 0)
 	{
-		if (_strncmp(*cmd, "./", 2) != 0 && _strncmp(*cmd, "/", 1) != 0)
+		if (strn_cmp(*cmd, "./", 2) != 0 && strn_cmp(*cmd, "/", 1) != 0)
 			path_cmd(cmd);
 		if (access(cmd[0], R_OK) != 0)
 		{
@@ -57,6 +57,6 @@ void signal_to_handle(int sig)
 {
 	if (sig == SIGINT)
 	{
-		PRINT("\n$ ");
+		print_str("\n$ ");
 	}
 }

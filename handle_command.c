@@ -1,5 +1,4 @@
-#include "header.h"
-
+#include "shell.h"
 /**
  * check_builtin - Checks if parsed command in built-in
  * @cmd: Parsed command to be check
@@ -7,7 +6,7 @@
  */
 int check_builtin(char **cmd)
 {
-	builtin fun[] = {
+	 shell_builtin fun[] = {
 		{"cd", NULL},
 		{"help", NULL},
 		{"echo", NULL},
@@ -23,7 +22,7 @@ int check_builtin(char **cmd)
 	}
 	while ((fun + i)->command)
 	{
-		if (_strcmp(cmd[0], (fun + i)->command) == 0)
+		if (str_cmp(cmd[0], (fun + i)->command) == 0)
 			return (0);
 		i++;
 	}
@@ -38,7 +37,7 @@ int check_builtin(char **cmd)
  */
 int handle_builtin(char **cmd, int st)
 {
-	builtin built_in[] = {
+	shell_builtin built_in[] = {
 		{"cd", change_dir},
 		{"env", dis_env},
 		{"help", display_help},
@@ -50,7 +49,7 @@ int handle_builtin(char **cmd, int st)
 
 	while ((built_in + i)->command)
 	{
-		if (_strcmp(cmd[0], (built_in + i)->command) == 0)
+		if (str_cmp(cmd[0], (built_in + i)->command) == 0)
 		{
 			return ((built_in + i)->function(cmd, st));
 		}
@@ -79,7 +78,7 @@ void exit_bul(char **cmd, char *input, char **argv, int c, int stat)
 	}
 	while (cmd[1][i])
 	{
-		if (_isalpha(cmd[1][i++]) != 0)
+		if (is_alpha(cmd[1][i++]) != 0)
 		{
 			_prerror(argv, c, cmd);
 			free(input);
@@ -88,7 +87,7 @@ void exit_bul(char **cmd, char *input, char **argv, int c, int stat)
 		}
 		else
 		{
-			status = _atoi(cmd[1]);
+			status = ato_i(cmd[1]);
 			if (status == 2)
 			{
 				_prerror(argv, c, cmd);

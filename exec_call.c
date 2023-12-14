@@ -34,7 +34,7 @@ int exec_command(char **command)
 			print_str("./shell: No such file or directory");
 			exit(EXIT_FAILURE);
 		}
-			
+
 	}
 	else
 		waitpid(pid, &status, 0);

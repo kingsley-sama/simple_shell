@@ -1,46 +1,50 @@
-#include "shell.h"
-#include <stddef.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+#include "header.h"
 
 /**
- * main - HSH entry point.
- * @argc: Number of command line arguments.
- * @argv: Argument vector.
- * Return: Exit status.
+ * main - Entry point to program
+ * @argc: Argument count
+ * @argv: Argument vector
+ * Return: Returns condition
  */
-int main(int argc, char *argv[])
+int main(__attribute__((unused)) int argc, char **argv)
 {
-	int is_interactive = isatty(STDIN_FILENO);
-	char *input = NULL;
-	char *exit_call = "exit";
-	ssize_t getline_val;
-	size_t input_size = 0;
-	(void)argc;
-	(void)argv;
+	char *input, **cmd, **commands;
+	int count = 0, i, condition = 1, stat = 0;
 
-	do {
-		if (is_interactive)
-			print_str("($) ");
-		getline_val = getline(&input, &input_size, stdin);
-		if (getline_val == -1 || strcmp(input, exit_call) == 0)
+	if (argv[1] != NULL)
+		read_file(argv[1], argv);
+	signal(SIGINT, signal_to_handle);
+	while (condition)
+	{
+		count++;
+		if (isatty(STDIN_FILENO))
+			prompt();
+		input = _getline();
+		if (input[0] == '\0')
+			continue;
+		history(input);
+		commands = separator(input);
+		for (i = 0; commands[i] != NULL; i++)
 		{
-			if (is_interactive)
+			cmd = parse_cmd(commands[i]);
+			if (_strcmp(cmd[0], "exit") == 0)
 			{
-				if (getline_val == -1)
-					putchar('\n');
+				free(commands);
+				exit_bul(cmd, input, argv, count, stat);
 			}
-			break;
+			else if (check_builtin(cmd) == 0)
+			{
+				stat = handle_builtin(cmd, stat);
+				free(cmd);
+				continue;
+			}
+			else
+				stat = check_cmd(cmd, input, count, argv);
+			free(cmd);
 		}
-		if (strlen(input) > 0 && input[strlen(input) - 1] == '\n')
-			input[strlen(input) - 1] = '\0';
-		call_command(input);
-		if (is_interactive)
-			putchar('\n');
-	} while (is_interactive);
-	if (input)
 		free(input);
-	return (0);
+		free(commands);
+		wait(&stat);
+	}
+	return (stat);
 }

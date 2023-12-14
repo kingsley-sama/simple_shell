@@ -14,11 +14,14 @@ int exec_command(char **command)
 	pid_t pid;
 	int status;
 
-	prog_path = find_command(command[0]);
+	prog_path = command[0];
+	if (command[1] != NULL)
+	{
+		print_str("./shell: No such file or directory");
+		exit(EXIT_FAILURE);
+	}
 	if (prog_path == NULL)
 	{
-		print_str(command[0]);
-		print_str(": command not found");
 		return (-1);
 	}
 	pid = fork();
@@ -27,7 +30,11 @@ int exec_command(char **command)
 	else if (pid == 0)
 	{
 		if (execve(prog_path, command, NULL) == -1)
+		{
+			print_str("./shell: No such file or directory");
 			exit(EXIT_FAILURE);
+		}
+			
 	}
 	else
 		waitpid(pid, &status, 0);

@@ -26,7 +26,7 @@ char *tok_quotes(char *q_toks, const char *de_sp)
 		strcat(q_toks, " ");
 		strcat(q_toks, n_sbtn);
 	}
-	q_toks[strlen(q_toks) - 1] = '\0';
+	q_toks[strlen(q_toks)] = '\0';
 	return (q_toks);
 }
 

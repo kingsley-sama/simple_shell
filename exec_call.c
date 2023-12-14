@@ -39,6 +39,6 @@ int exec_command(char **command)
 	else
 		waitpid(pid, &status, 0);
 
-	free(prog_path);
+	free_tokens(command);
 	return (0);
 }

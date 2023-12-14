@@ -99,8 +99,10 @@ char **parse_command(const char *str)
 	{
 		token = strtok(NULL, ";");
 		tokens[i] = token;
+		free(token);
 		i++;
 	}
+	free(strdup(str));
 	return (tokens);
 }
 
@@ -111,8 +113,14 @@ char **parse_command(const char *str)
  */
 void free_tokens(char **tokens)
 {
+	int i = 0;
 	if (tokens == NULL)
 		return;
+	while (tokens[i] != NULL)
+	{
+		free(tokens[i]);
+		i++;
+	}
 	free(tokens);
 }
 

@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
 		if (is_interactive)
 			putchar('\n');
 	} while (is_interactive);
-	free(input);
+	if (input)
+		free(input);
 	return (0);
 }

@@ -1,4 +1,3 @@
-
 #include "shell.h"
 
 /**
@@ -6,6 +5,8 @@
  * @input: Input recieved from user
  * @counter: Count of shell loop
  * @argv: Arguments before program starts(argv[0] == Shell Program Name)
+ *
+ * Return:Void.
  */
 
 void print_error(char *input, int counter, char **argv)
@@ -27,6 +28,8 @@ void print_error(char *input, int counter, char **argv)
  * @argv: Arguments before program starts(argv[0] == Shell Program Name)
  * @c: Error Count
  * @cmd: Array of parsed command strings
+ *
+ * Return:Void.
  */
 
 void _prerror(char **argv, int c, char **cmd)
@@ -48,6 +51,8 @@ void _prerror(char **argv, int c, char **cmd)
  * error_file - Prints custom Error
  * @argv: Arguments before program starts(argv[0] == Shell Program Name)
  * @c: Error Count
+ *
+ * Return:Void
  */
 void error_file(char **argv, int c)
 {

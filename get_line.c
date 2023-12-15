@@ -1,7 +1,8 @@
 #include "shell.h"
 
 /**
- * _getline - read input from standard input by user
+ * get_line - read input from standard input by user
+ *
  * Return: the input on a buffer
  */
 char *get_line()
@@ -12,30 +13,30 @@ char *get_line()
 	buffer = malloc(buffsize);
 	if (buffer == NULL)
 	{
-		free(buffer);
-		return (NULL);
+	free(buffer);
+	return (NULL);
 	}
 	for (i = 0; c != EOF && c != '\n'; i++)
 	{
-		fflush(stdin);
-		rd = read(STDIN_FILENO, &c, 1);
-		if (rd == 0)
-		{
-			free(buffer);
-			exit(EXIT_SUCCESS);
-		}
-		buffer[i] = c;
-		if (buffer[0] == '\n')
-			return (enter(buffer));
-		if (i >= buffsize)
-		{
-			buffer = realloc(buffer, (buffsize + 2));
-			if (buffer == NULL)
-			{
-				free(buffer);
-				return (NULL);
-			}
-		}
+	fflush(stdin);
+	rd = read(STDIN_FILENO, &c, 1);
+	if (rd == 0)
+	{
+	free(buffer);
+	exit(EXIT_SUCCESS);
+	}
+	buffer[i] = c;
+	if (buffer[0] == '\n')
+	return (enter(buffer));
+	if (i >= buffsize)
+	{
+	buffer = realloc(buffer, (buffsize + 2));
+	if (buffer == NULL)
+	{
+	free(buffer);
+	return (NULL);
+	}
+	}
 	}
 	buffer[i] = '\0';
 	buf = space(buffer);
@@ -47,6 +48,7 @@ char *get_line()
 /**
  * enter - Handles newline character input
  * @string: String to be handled
+ *
  * Return: Empty string
  */
 char *enter(char *string)
@@ -68,28 +70,29 @@ char *space(char *str)
 	buff = malloc(sizeof(char) * (str_len(str) + 1));
 	if (buff == NULL)
 	{
-		free(buff);
-		return (NULL);
+	free(buff);
+	return (NULL);
 	}
 	for (i = 0; str[i] == ' '; i++)
 		;
 	for (; str[i + 1] != '\0'; i++)
 	{
-		buff[j] = str[i];
-		j++;
+	buff[j] = str[i];
+	j++;
 	}
 	buff[j] = '\0';
 	if (buff[0] == '\0' || buff[0] == '#')
 	{
-		free(buff);
-		return ("\0");
+	free(buff);
+	return ("\0");
 	}
 	return (buff);
 }
 
 /**
  * hashtag_handler - function that removes everything after '#'
- * @buff: input buffer
+ * @buff: input buffer.
+ *
  * Return: nothing
  */
 void hashtag_handler(char *buff)
@@ -98,9 +101,9 @@ void hashtag_handler(char *buff)
 
 	for (i = 0; buff[i] != '\0'; i++)
 	{
-		if (buff[i] == '#' && buff[i - 1] == ' ' && buff[i + 1] == ' ')
-		{
-			buff[i] = '\0';
-		}
+	if (buff[i] == '#' && buff[i - 1] == ' ' && buff[i + 1] == ' ')
+	{
+	buff[i] = '\0';
+	}
 	}
 }

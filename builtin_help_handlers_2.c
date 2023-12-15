@@ -2,6 +2,8 @@
 
 /**
  * help_env - Displays information on the shell by builtin command 'env'
+ *
+ * Return:Void.
  */
 void help_env(void)
 {
@@ -12,6 +14,8 @@ void help_env(void)
 
 /**
  * help_setenv - Displays information on the shell by builtin command 'setenv'
+ *
+ * Return:Void
  */
 void help_setenv(void)
 {
@@ -27,6 +31,8 @@ void help_setenv(void)
 /**
  * help_unsetenv - Displays information on the shellby builtin command
  * 'unsetenv'
+ *
+ * Return:Void
  */
 void help_unsetenv(void)
 {
@@ -43,6 +49,7 @@ void help_unsetenv(void)
  * display_help - display help for builtin commands
  * @cmd: parsed command
  * @st: Status of last command executed
+ *
  * Return: 0 Success
  */
 int display_help(char **cmd, __attribute__((unused))int st)

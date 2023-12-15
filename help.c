@@ -1,7 +1,9 @@
 #include "shell.h"
 
 /**
- * help_all - Displays all possible builtin shellby commands
+ * help_all - Displays all possible builtin shellby commands.
+ *
+ * Return:Void
  */
 void help_all(void)
 {
@@ -23,7 +25,9 @@ void help_all(void)
 }
 
 /**
- * help_alias - Displays information on the shell by builtin command 'alias'
+ * help_alias - Displays information on the shell by builtin command 'alias'.
+ *
+ * Return:Void.
  */
 void help_alias(void)
 {
@@ -46,6 +50,8 @@ void help_alias(void)
 
 /**
  * help_cd - Displays information on the shell by builtin command 'cd'
+ *
+ * Return:void.
  */
 void help_cd(void)
 {
@@ -65,7 +71,9 @@ void help_cd(void)
 }
 
 /**
- * help_exit - Displays information on the shell by builtin command 'exit'
+ * help_exit - Displays information on the shell by builtin command 'exit'.
+ *
+ * Return:Void.
  */
 void help_exit(void)
 {
@@ -81,7 +89,9 @@ void help_exit(void)
 }
 
 /**
- * help_help - Displays information on the shell by builtin command 'help'
+ * help_help - Displays information on the shell by builtin command 'help'.
+ *
+ * Return:Void
  */
 void help_help(void)
 {

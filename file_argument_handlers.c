@@ -3,6 +3,7 @@
  * read_file - Reads commands from the argument File
  * @file: File containing commands
  * @argv: Arguments passed
+ *
  * Return: -1 or 0
  */
 void read_file(char *file, char **argv)
@@ -15,16 +16,16 @@ void read_file(char *file, char **argv)
 	fp = fopen(file, "r");
 	if (fp == NULL)
 	{
-		error_file(argv, i);
-		exit(127);
+	error_file(argv, i);
+	exit(127);
 	}
 	while ((getline(&line, &s_len, fp)) != -1)
 	{
-		i++;
-		treat_file(line, i, fp, argv);
+	i++;
+	treat_file(line, i, fp, argv);
 	}
 	if (line)
-		free(line);
+	free(line);
 	fclose(fp);
 	exit(0);
 }
@@ -35,6 +36,8 @@ void read_file(char *file, char **argv)
  * @i: Error ier
  * @fp: File descriptor
  * @argv: Command line arguments
+ *
+ * Return:Void
  */
 void treat_file(char *line, int i, FILE *fp, char **argv)
 {
@@ -43,16 +46,16 @@ void treat_file(char *line, int i, FILE *fp, char **argv)
 
 	command_line = parse_cmd(line);
 	if (strn_cmp(command_line[0], "exit", 4) == 0)
-		exit_bull(command_line, line, fp);
+	exit_bull(command_line, line, fp);
 	else if (check_builtin(command_line) == 0)
 	{
-		stat = handle_builtin(command_line, stat);
-		free(command_line);
+	stat = handle_builtin(command_line, stat);
+	free(command_line);
 	}
 	else
 	{
-		stat = check_cmd(command_line, line, i, argv);
-		free(command_line);
+	stat = check_cmd(command_line, line, i, argv);
+	free(command_line);
 	}
 }
 
@@ -61,6 +64,8 @@ void treat_file(char *line, int i, FILE *fp, char **argv)
  * @line: Line from a file
  * @cmd: Parsed command
  * @fd: File Descriptor
+ *
+ * Return:Void
  */
 void exit_bull(char **cmd, char *line, FILE *fd)
 {
@@ -69,15 +74,15 @@ void exit_bull(char **cmd, char *line, FILE *fd)
 
 	if (cmd[i] == NULL)
 	{
-		free(line);
-		free(cmd);
-		fclose(fd);
-		exit(errno);
+	free(line);
+	free(cmd);
+	fclose(fd);
+	exit(errno);
 	}
 	while (cmd[1][i])
 	{
-		if (is_alpha(cmd[1][i++]) < 0)
-			perror("Illegal number");
+	if (is_alpha(cmd[1][i++]) < 0)
+	perror("Illegal number");
 	}
 	status = ato_i(cmd[1]);
 	free(line);

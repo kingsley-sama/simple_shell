@@ -1,30 +1,32 @@
 #include "shell.h"
 /**
  * check_builtin - Checks if parsed command in built-in
- * @cmd: Parsed command to be check
+ * @cmd: Parsed command to be check.
+ *
  * Return: 0 Succes -1 Fail
  */
 int check_builtin(char **cmd)
 {
-	 shell_builtin fun[] = {
-		{"cd", NULL},
-		{"help", NULL},
-		{"echo", NULL},
-		{"env", NULL},
-		{"history", NULL},
-		{NULL, NULL}
+	shell_builtin fun[] = {
+	{"cd", NULL},
+	{"help", NULL},
+	{"echo", NULL},
+	{"env", NULL},
+	{"history", NULL},
+	{NULL, NULL}
 	};
+
 	int i = 0;
 
 	if (*cmd == NULL)
 	{
-		return (-1);
+	return (-1);
 	}
 	while ((fun + i)->command)
 	{
-		if (str_cmp(cmd[0], (fun + i)->command) == 0)
-			return (0);
-		i++;
+	if (str_cmp(cmd[0], (fun + i)->command) == 0)
+	return (0);
+	i++;
 	}
 	return (-1);
 }
@@ -33,27 +35,29 @@ int check_builtin(char **cmd)
  * handle_builtin - Handles predefined built in commands
  * @cmd: Array of parsed command strings
  * @st: Status of last execution
+ *
  * Return: -1 Failure 0 Success
  */
 int handle_builtin(char **cmd, int st)
 {
 	shell_builtin built_in[] = {
-		{"cd", change_dir},
-		{"env", dis_env},
-		{"help", display_help},
-		{"echo", echo_bul},
-		{"history", history_dis},
-		{NULL, NULL}
+	{"cd", change_dir},
+	{"env", dis_env},
+	{"help", display_help},
+	{"echo", echo_bul},
+	{"history", history_dis},
+	{NULL, NULL}
 	};
+
 	int i = 0;
 
 	while ((built_in + i)->command)
 	{
-		if (str_cmp(cmd[0], (built_in + i)->command) == 0)
-		{
-			return ((built_in + i)->function(cmd, st));
-		}
-		i++;
+	if (str_cmp(cmd[0], (built_in + i)->command) == 0)
+	{
+	return ((built_in + i)->function(cmd, st));
+	}
+	i++;
 	}
 	return (-1);
 }
@@ -65,6 +69,8 @@ int handle_builtin(char **cmd, int st)
  * @argv: Arguments before program starts(argv[0] == Shell Program Name)
  * @c: Shell execution count
  * @stat: Exit status
+ *
+ * Return: Void.
  */
 void exit_bul(char **cmd, char *input, char **argv, int c, int stat)
 {
@@ -72,33 +78,33 @@ void exit_bul(char **cmd, char *input, char **argv, int c, int stat)
 
 	if (cmd[1] == NULL)
 	{
-		free(input);
-		free(cmd);
-		exit(stat);
+	free(input);
+	free(cmd);
+	exit(stat);
 	}
 	while (cmd[1][i])
 	{
-		if (is_alpha(cmd[1][i++]) != 0)
-		{
-			_prerror(argv, c, cmd);
-			free(input);
-			free(cmd);
-			exit(2);
-		}
-		else
-		{
-			status = ato_i(cmd[1]);
-			if (status == 2)
-			{
-				_prerror(argv, c, cmd);
-				free(input);
-				free(cmd);
-				exit(status);
-			}
-			free(input);
-			free(cmd);
-			exit(status);
+	if (is_alpha(cmd[1][i++]) != 0)
+	{
+	_prerror(argv, c, cmd);
+	free(input);
+	free(cmd);
+	exit(2);
+	}
+	else
+	{
+	status = ato_i(cmd[1]);
+	if (status == 2)
+	{
+	_prerror(argv, c, cmd);
+	free(input);
+	free(cmd);
+	exit(status);
+	}
+	free(input);
+	free(cmd);
+	exit(status);
 
-		}
+	}
 	}
 }

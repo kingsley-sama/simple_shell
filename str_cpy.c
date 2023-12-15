@@ -6,6 +6,7 @@
  * @s1: first string
  * @s2: second string
  * @n: amount of characters to compare
+ *
  * Return: 1 if the strings don't match otherwise 0
  */
 int strn_cmp(const char *s1, const char *s2, size_t n)
@@ -13,14 +14,14 @@ int strn_cmp(const char *s1, const char *s2, size_t n)
 	size_t i;
 
 	if (s1 == NULL)
-		return (-1);
+	return (-1);
 
 	for (i = 0; i < n && s2[i]; i++)
 	{
-		if (s1[i] != s2[i])
-		{
-			return (1);
-		}
+	if (s1[i] != s2[i])
+	{
+	return (1);
+	}
 	}
 	return (0);
 }
@@ -28,6 +29,7 @@ int strn_cmp(const char *s1, const char *s2, size_t n)
 /**
  * str_dup - duplicate a string
  * @str: string
+ *
  * Return: duplicated string or Null if failed
  */
 char *str_dup(char *str)
@@ -39,11 +41,11 @@ char *str_dup(char *str)
 	str2 = malloc(sizeof(char) * (length + 1));
 	if (!str2)
 	{
-		return (NULL);
+	return (NULL);
 	}
 	for (i = 0; i <= length; i++)
 	{
-		str2[i] = str[i];
+	str2[i] = str[i];
 	}
 	return (str2);
 }
@@ -51,6 +53,7 @@ char *str_dup(char *str)
  * str_cpy - function that copies a string
  * @dest: destination
  * @src: source
+ *
  * Return: destination
  */
 char *str_cpy(char *dest, char *src)
@@ -59,8 +62,8 @@ char *str_cpy(char *dest, char *src)
 
 	while (src[i])
 	{
-		dest[i] = src[i];
-		i++;
+	dest[i] = src[i];
+	i++;
 	}
 	dest[i] = '\0';
 	return (dest);
@@ -70,6 +73,7 @@ char *str_cpy(char *dest, char *src)
  * str_cat - function that concatenates two strings
  * @dest: first string
  * @src: second string
+ *
  * Return: first string + second string
  */
 char *str_cat(char *dest, char *src)
@@ -83,9 +87,9 @@ char *str_cat(char *dest, char *src)
 
 	while (*src != '\0')
 	{
-		*dest = *src;
-		dest++;
-		src++;
+	*dest = *src;
+	dest++;
+	src++;
 	}
 	*dest = '\0';
 	return (s);
@@ -95,15 +99,16 @@ char *str_cat(char *dest, char *src)
  * str_chr - function that locates character in a string
  * @s: string to be searched
  * @c: character to be located
+ *
  * Return: pointer to character
  */
 char *str_chr(char *s, char c)
 {
 	do {
-		if (*s == c)
-		{
-			break;
-		}
+	if (*s == c)
+	{
+	break;
+	}
 	} while (*s++);
 	return (s);
 }

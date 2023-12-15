@@ -13,7 +13,7 @@ void print_str(char *str)
 
 	while (str[i] != '\0')
 	{
-		i++;
+	i++;
 	}
 	write(STDOUT_FILENO, str, i);
 }

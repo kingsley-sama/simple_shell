@@ -2,7 +2,8 @@
 
 /**
  * put_char - function that writes the character to stdout
- * @c: The character to print
+ * @c: The character to print.
+ *
  * Return: character to standard output
  */
 int put_char(char c)
@@ -11,8 +12,9 @@ int put_char(char c)
 }
 
 /**
- * puts - function that prints a string
+ * put_s - function that prints a string
  * @str: pointer to string
+ *
  * Return: void
  */
 void put_s(char *str)
@@ -21,7 +23,7 @@ void put_s(char *str)
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		put_char(str[i]);
+	put_char(str[i]);
 	}
 	put_char('\n');
 }
@@ -31,6 +33,7 @@ void put_s(char *str)
  * @dest: destination string
  * @src: source string
  * @n: number of charaters to be copied
+ *
  * Return: copied strings
  */
 char *strn_cpy(char *dest, char *src, int n)
@@ -39,13 +42,13 @@ char *strn_cpy(char *dest, char *src, int n)
 
 	while (i < n && *(src + i))
 	{
-		*(dest + i) = *(src + i);
-		i++;
+	*(dest + i) = *(src + i);
+	i++;
 	}
 	while (i < n)
 	{
-		*(dest + i) = '\0';
-		i++;
+	*(dest + i) = '\0';
+	i++;
 	}
 	return (dest);
 }
@@ -53,6 +56,7 @@ char *strn_cpy(char *dest, char *src, int n)
 /**
  * str_len - function that counts the length of a string
  * @s: string input
+ *
  * Return: length of string
  */
 int str_len(char *s)
@@ -61,7 +65,7 @@ int str_len(char *s)
 
 	for (i = 0; s[i] != '\0'; i++)
 	{
-		continue;
+	continue;
 	}
 	return (i);
 }
@@ -69,6 +73,7 @@ int str_len(char *s)
 /**
  * ato_i - function to convert string to a integer
  * @s: string input
+ *
  * Return: converted integer
  */
 int ato_i(char *s)
@@ -78,19 +83,19 @@ int ato_i(char *s)
 
 	while (s[i] != '\0')
 	{
-		if (s[i] == '-')
-		{
-			return (2);
-		}
-		k = s[i] - '0';
+	if (s[i] == '-')
+	{
+	return (2);
+	}
+	k = s[i] - '0';
 
-		if (l > 0 && !(k >= 0 && k <= 9))
-			break;
+	if (l > 0 && !(k >= 0 && k <= 9))
+	break;
 
-		if (k >= 0 && k <= 9)
-			l = l * 10 + k;
+	if (k >= 0 && k <= 9)
+	l = l * 10 + k;
 
-		i++;
+	i++;
 	}
 	l *= j;
 	return (l);

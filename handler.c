@@ -1,9 +1,10 @@
 #include "shell.h"
 
 /**
- * _strcmp - function that compares two string
+ * str_cmp - function that compares two string
  * @s1: first string
- * @s2: second string
+ * @s2: second string.
+ *
  * Return: 0 if identical otherwise how much diffrent
  */
 int str_cmp(char *s1, char *s2)
@@ -14,20 +15,20 @@ int str_cmp(char *s1, char *s2)
 	len2 = str_len(s2);
 
 	if (s1 == NULL || s2 == NULL)
-		return (1);
+	return (1);
 
 	if (len1 != len2)
-		return (1);
+	return (1);
 
 	for (i = 0; s1[i]; i++)
 	{
-		if (s1[i] != s2[i])
-		{
-			cmp = s1[i] - s2[i];
-			break;
-		}
-		else
-			continue;
+	if (s1[i] != s2[i])
+	{
+	cmp = s1[i] - s2[i];
+	break;
+	}
+	else
+	continue;
 
 	}
 	return (cmp);
@@ -35,24 +36,26 @@ int str_cmp(char *s1, char *s2)
 
 /**
  * is_alpha - function to check if c is alphabet
- * @c: character to check
+ * @c: character to check.
+ *
  * Return: 1 if true 0 if false
  */
 int is_alpha(int c)
 {
 	if (((c >= 97) && (c <= 122)) || ((c >= 65) && (c <= 90)))
 	{
-		return (1);
+	return (1);
 	}
 	else
 	{
-		return (0);
+	return (0);
 	}
 }
 
 /**
  * ito_a - funciton that convert integer to character
- * @n: integer to convert
+ * @n: integer to convert.
+ *
  * Return: character pointer
  */
 char *ito_a(unsigned int n)
@@ -65,16 +68,16 @@ char *ito_a(unsigned int n)
 
 	if (!s)
 	{
-		free(s);
-		return (NULL);
+	free(s);
+	return (NULL);
 	}
 	*s = '\0';
 
 	while (n / 10)
 	{
-		s[i] = (n % 10) + '0';
-		n /= 10;
-		i++;
+	s[i] = (n % 10) + '0';
+	n /= 10;
+	i++;
 	}
 
 	s[i] = (n % 10) + '0';
@@ -87,7 +90,9 @@ char *ito_a(unsigned int n)
 /**
  * rev - function reverse an array
  * @arr: array to reverse
- * @len: length of array
+ * @len: length of array.
+ *
+ * Return:Void.
  */
 void rev(char *arr, int len)
 {
@@ -96,15 +101,16 @@ void rev(char *arr, int len)
 
 	for (i = 0; i < (len / 2); i++)
 	{
-		tmp = arr[i];
-		arr[i] = arr[(len - 1) - i];
-		arr[(len - 1) - i] = tmp;
+	tmp = arr[i];
+	arr[i] = arr[(len - 1) - i];
+	arr[(len - 1) - i] = tmp;
 	}
 }
 
 /**
  * intlen - function that determine length of integer
- * @num: given integer
+ * @num: given integer.
+ *
  * Return: length of integer
  */
 int intlen(int num)
@@ -113,8 +119,8 @@ int intlen(int num)
 
 	while (num != 0)
 	{
-		len++;
-		num /= 10;
+	len++;
+	num /= 10;
 	}
 	return (len);
 }

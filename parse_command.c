@@ -3,6 +3,7 @@
 /**
  * parse_cmd - Parses the command recieved from stdin
  * @input: String gathered from stdin
+ *
  * Return: Parsed strings to be used as arguments
  */
 char **parse_cmd(char *input)
@@ -13,21 +14,21 @@ char **parse_cmd(char *input)
 	int buffsize = BUFSIZE;
 
 	if (input[0] == ' ' && input[str_len(input)] == ' ')
-		exit(0);
+	exit(0);
 	if (input == NULL)
-		return (NULL);
+	return (NULL);
 	arguments = malloc(sizeof(char *) * buffsize);
 	if (!arguments)
 	{
-		free(arguments);
-		perror("hsh");
-		return (NULL);
+	free(arguments);
+	perror("hsh");
+	return (NULL);
 	}
 	argument = str_tok(input, "\n\t\r\a ");
 	for (i = 0; argument; i++)
 	{
-		arguments[i] = argument;
-		argument = str_tok(NULL, "\n\t\r\a ");
+	arguments[i] = argument;
+	argument = str_tok(NULL, "\n\t\r\a ");
 	}
 	arguments[i] = NULL;
 
